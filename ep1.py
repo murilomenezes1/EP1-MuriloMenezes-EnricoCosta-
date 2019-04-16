@@ -1,13 +1,9 @@
 # EP 2019-1: Escape Insper
 #
 # Alunos: 
-<<<<<<< HEAD
+
 # - aluno A: Enrico Venturini Costa, enricovc@al.insper.edu.br
 # - aluno B: Sicrano de Almeida, sicranoa1@insper.edu.br
-=======
-# - aluno A:Enrico Venturini Costa , fulanos@insper.edu.br
-# - aluno B: Murilo Lima de Campos Menezes, sicranoa1@insper.edu.br
->>>>>>> b1eac9dbe405e7ba3760ea1705208d373dbcc136
 
 def carregar_cenarios():
 	cenarios = {
@@ -64,7 +60,6 @@ def main():
 	while not game_over:
 		cenario_atual = cenarios[nome_cenario_atual]
 
-<<<<<<< HEAD
         print(cenario_atual['titulo'])
         print("-"*len(cenario_atual['titulo']))
         print(cenario_atual['descricao'])
@@ -78,25 +73,6 @@ def main():
             for opcao, descricao_da_opcao in cenario_atual["opcoes"].items():
                 print('{0}:{1}'.format(opcao, descricao_da_opcao))
             escolha = input("")
-=======
-
-		
-		print(cenario_atual["titulo"])
-		print("-"*len(cenario_atual["titulo"]))
-		print(cenario_atual["descricao"])
-
->>>>>>> b1eac9dbe405e7ba3760ea1705208d373dbcc136
-
-
-		opcoes = cenario_atual['opcoes']
-		if len(opcoes) == 0:
-			print("Acabaram-se suas opções! Mwo mwo mwooooo...")
-			game_over = True
-		else:
-
-			# Aluno B: substitua este comentário e a linha abaixo pelo código
-			# para pedir a escolha do usuário.
-			escolha = ""
 
 			if escolha in opcoes:
 				nome_cenario_atual = escolha
@@ -109,9 +85,7 @@ def main():
 
 # Programa principal.
 if __name__ == "__main__":
-<<<<<<< HEAD
+
     main()
 
-=======
-	main()
->>>>>>> b1eac9dbe405e7ba3760ea1705208d373dbcc136
+
