@@ -22,7 +22,7 @@ def carregar_cenarios():
 			"titulo" : "power up store",
 			"descricao" : "voce chegou a power up store! Aqui voce pode comprar upgrades.",
 			"opcoes" : {
-				"comprar": "falar com o vendedor para comprar seu upgrade.",
+				"vendedor": "falar com o vendedor para comprar seu upgrade.",
 				"inicio" : "voltar para Entrada"
 			}
 		},
@@ -38,11 +38,25 @@ def carregar_cenarios():
 			"titulo" : "salas dos professores",
 			"descricao" : "voce chegou ao andar dos professores, mas tres estudantes level 5 travam a passagem para a sala do professor de Desoft. Derrote-os para seguir em frente.",
 			"opcoes" : {
-				"Lutar":"Desafiar cada estudante para acessar a sala do professor.",
-				"inicio":"voltar para a entrada"
+				"lutar" : "Desafiar cada estudante para acessar a sala do professor.",
+				"inicio" : "voltar para a entrada"
+			}
+		},
+		"vendedor" : {
+			"titulo" : "Vendedor",
+			"descricao" : "Fale com o vendedor para adquirir power ups",
+			"opcoes" : {
+				"comprar" : "Comprar um pão de queijo vital? (10 moedas)(+1 LVL)",
+				"inicio" : "voltar para a entrada"
+			}
+		},
+		"comprar" : {
+			"titulo" : "Comprar",
+			"descricao" : "Você comprou um pão de queijo vital por 10 moedas e subiu um level.",
+			"opcoes" : {
+				"inicio" : "voltar para a entrada"
 			}
 		}
-
 	}
 	nome_cenario_atual = "inicio"
 	return cenarios, nome_cenario_atual
@@ -60,6 +74,8 @@ def main():
 			"Você está na entrada do Insper, veja se consegue encontrar o professor e convencê-lo a fazer a famosa 'boa'.".format(avatar))
 
 	cenarios, nome_cenario_atual = carregar_cenarios()
+	LVL = 1
+	moedas = 10
 
 	game_over = False
 
@@ -72,6 +88,8 @@ def main():
 		print()
 		print(cenario_atual["descricao"])
 		print()
+		print("LVL: {}".format(LVL))
+		print("Moedas: {}".format(moedas))
 		print("Decida como seguir em frente.")
 		print()
 
@@ -93,6 +111,12 @@ def main():
 				print("Moiou o bigode, sepa você perdeu...")
 				game_over = True
 
+		# POWER UP STORE GIT enrico
+		if cenario_atual == cenarios["vendedor"]:
+			if escolha == "comprar":
+				if moedas >= 10:
+					moedas = moedas - 10
+					LVL = LVL + 1 
 	print("Azedou teu caldo, você morreu!")
 
 
