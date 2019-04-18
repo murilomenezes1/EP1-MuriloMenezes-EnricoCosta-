@@ -98,7 +98,7 @@ def main():
 		x = random.randint(0,9)
 		if x >= 3:
 			monstro = True
-
+ 
 		if monstro:
 
 			lvl_monstro = random.randint(1,4)
