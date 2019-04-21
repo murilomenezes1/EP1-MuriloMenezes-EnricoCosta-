@@ -63,21 +63,22 @@ def carregar_cenarios():
 	nome_cenario_atual = "inicio"
 	return cenarios, nome_cenario_atual
 
-def print_slow(str):
+def slow_print(str):
 	for letter in str:
 		sys.stdout.write(letter)
 		sys.stdout.flush()
 		time.sleep(0.01*random.randint(1,10))
+	print()
 
 
 def main():
-	print_slow("Azedou, o EP1 chegou!")
+	slow_print("Azedou, o EP1 chegou!")
 	print()
 	print("---------------------")
 	print()
 	avatar = input("Qual é o seu nome? ")
 	print()
-	print_slow("ééé {0}... A data de entrega do EP1 é amanhã e você ficou fazendo hora extra no suujinhus"
+	slow_print("ééé {0}... A data de entrega do EP1 é amanhã e você ficou fazendo hora extra no suujinhus"
 			", agora tem que correr atrás do prejuízo e tentar adiar essa bagaça."
 			"Você está na entrada do Insper, veja se consegue encontrar o professor e convencê-lo a fazer a famosa 'boa'.".format(avatar))
 
@@ -117,33 +118,33 @@ def main():
 	while not game_over:
 		cenario_atual = cenarios[nome_cenario_atual]
 
-		print(cenario_atual["titulo"])
+		slow_print(cenario_atual["titulo"])
 		print()
 		print("-"*len(cenario_atual["titulo"]))
 		print()
-		print(cenario_atual["descricao"])
+		slow_print(cenario_atual["descricao"])
 		print()
 		print("LVL: {}".format(LVL))
 		print("Moedas: {}".format(moedas))
-		print("Decida como seguir em frente.")
+		slow_print("Decida como seguir em frente.")
 		print()
 
 
 		opcoes = cenario_atual["opcoes"]
 		if len(opcoes) == 0:
-			print("Rodou, fiote... o Toshi vai te jantar.")
+			slow_print("Rodou, fiote... o Toshi vai te jantar.")
 			game_over = True
 
 		else: 
 			for opcao, descricao_da_opcao in cenario_atual["opcoes"].items():
-				print("{0}:{1}".format(opcao, descricao_da_opcao))
+				print("{0} : {1}".format(opcao, descricao_da_opcao))
 			escolha = input("Eai, qual vai ser? ")
 
 			if escolha in opcoes:
 				nome_cenario_atual = escolha
 
 			else: 
-				print("Moiou o bigode, sepa você perdeu...")
+				slow_print("Moiou o bigode, sepa você perdeu...")
 				game_over = True
 
 		# Implementa o monstro aleatório
@@ -157,7 +158,7 @@ def main():
 			lvl_monstro = random.randint(1,4)
 			HP_monstro, HIT_monstro = personagens(lvl_monstro)
 			HP_avatar, HIT_avatar = personagens(LVL)
-			print("Você encontrou um veterano LVL {}, e ele está te mandando buscar uma breja no suujus. Derrote-o para não se atrasar ainda mais.".format(lvl_monstro))
+			slow_print("Você encontrou um veterano LVL {}, e ele está te mandando buscar uma breja no suujus. Derrote-o para não se atrasar ainda mais.".format(lvl_monstro))
 			print("Monstro - HP = {} Hitpoints = {}".format(HP_monstro, HIT_monstro))
 			print("Avatar - HP = {} Hitpoints = {}".format(HP_avatar, HIT_avatar))
 
@@ -180,22 +181,22 @@ def main():
 
 
 				if HP_monstro < 0 and HP_avatar > 0:
-					print("Voce ganhou a luta!")
+					slow_print("Voce ganhou a luta!")
 					LVL +=1 
 					moedas += 10 
-					print("você ganhou 10 moedas e subiu de nível!")
+					slow_print("você ganhou 10 moedas e subiu de nível!")
 					print("LVL = {0}".format(LVL))
 					print("Moedas = {0}".format(moedas))
 					
 				elif HP_avatar < 0:
-					print("Voce morreu!")
+					slow_print("Voce morreu!")
 					game_over = True
 			elif decisao == "fugir":
-				print("Você fugiu!")
+				slow_print("Você fugiu!")
 				
 
 			else:
-				print("escolha errada.. você perdeu!")
+				slow_print("escolha errada.. você perdeu!")
 				game_over = True
 
 
@@ -206,7 +207,7 @@ def main():
 				if moedas >= 10:
 					moedas = moedas - 10
 					LVL = LVL + 1 
-	print("Azedou teu caldo, você morreu!")
+	slow_print("Azedou teu caldo, você morreu!")
 
 
 # Programa Principal.
