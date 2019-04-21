@@ -21,7 +21,7 @@ def carregar_cenarios():
 			}
 		},
 		"casa do pão de queijo" : {
-			"titulo" : "power up store",
+			"titulo" : "Power UP Store",
 			"descricao" : "voce chegou a power up store! Aqui voce pode comprar upgrades.",
 			"opcoes" : {
 				"vendedor": "falar com o vendedor para comprar seu upgrade.",
@@ -30,7 +30,7 @@ def carregar_cenarios():
 		},
 		"biblioteca" : {
 			"titulo" : "biblioteca",
-			"descricao": "voce chegou a biblioteca e encontrou um veterano irritado, derrote-o para ganhar XP e dinheiro",
+			"descricao": "voce chegou a biblioteca e encontrou um veterano LVL 1 irritado, derrote-o para ganhar XP e dinheiro",
 			"opcoes" : {
 				"lutar":"ganhar XP e dinheiro",
 				"inicio":"voltar para a entrada"
@@ -38,9 +38,9 @@ def carregar_cenarios():
 		},
 		"andar dos professores" : {
 			"titulo" : "salas dos professores",
-			"descricao" : "voce chegou ao andar dos professores, mas tres estudantes level 5 travam a passagem para a sala do professor de Desoft. Derrote-os para seguir em frente.",
+			"descricao" : "voce chegou ao andar dos professores, mas um estudante level 5 trava a passagem para a sala do professor de Desoft. Derrote-o para seguir em frente.",
 			"opcoes" : {
-				"lutar" : "Desafiar cada estudante para acessar a sala do professor.",
+				"desafiar" : "Desafiar cada estudante para acessar a sala do professor.",
 				"inicio" : "voltar para a entrada"
 			}
 		},
@@ -53,8 +53,8 @@ def carregar_cenarios():
 			}
 		},
 		"comprar" : {
-			"titulo" : "Comprar",
-			"descricao" : "Você comprou um pão de queijo vital por 10 moedas e subiu um level.",
+			"titulo" : "Power UP Store",
+			"descricao" : "Vendedor: 'Obrigado pela preferência, volte sempre!'",
 			"opcoes" : {
 				"inicio" : "voltar para a entrada"
 			}
@@ -117,12 +117,22 @@ def carregar_cenarios():
 	nome_cenario_atual = "inicio"
 	return cenarios, nome_cenario_atual
 
+
 def slow_print(str):
 	for letter in str:
 		sys.stdout.write(letter)
 		sys.stdout.flush()
-		time.sleep(0.01*random.randint(1,10))
+		time.sleep(0.02)
 	print()
+
+
+
+
+
+
+
+
+
 
 
 def main():
@@ -169,9 +179,10 @@ def main():
 
 
 
+
 	while not game_over:
 		cenario_atual = cenarios[nome_cenario_atual]
-
+		print()
 		slow_print(cenario_atual["titulo"])
 		print()
 		print("-"*len(cenario_atual["titulo"]))
@@ -183,27 +194,29 @@ def main():
 		slow_print("Decida como seguir em frente.")
 		print()
 
-
 		opcoes = cenario_atual["opcoes"]
 		if len(opcoes) == 0:
-			slow_print("Rodou, fiote... o Toshi vai te jantar.")
+			print("Rodou, fiote... o Toshi vai te jantar.")
 			game_over = True
 
 		else: 
 			for opcao, descricao_da_opcao in cenario_atual["opcoes"].items():
-				print("{0} : {1}".format(opcao, descricao_da_opcao))
+				print("{0}:{1}".format(opcao, descricao_da_opcao))
 			escolha = input("Eai, qual vai ser? ")
 
 			if escolha in opcoes:
 				nome_cenario_atual = escolha
 
+			elif escolha == "PAI DE TODOS":
+				nome_cenario_atual = escolha
+
 			else: 
-				slow_print("Moiou o bigode, sepa você perdeu...")
+				print("Escolha errada... você perdeu!")
 				game_over = True
 
-		# Implementa o monstro aleatório
-
-		x = random.randint(0,12)
+		# Implementação do Monstro
+		x = random.randint(0,14)
+		y = random.randint(0,20)
 		if x <= 3:
 			monstro = True
  
@@ -211,14 +224,14 @@ def main():
 
 			lvl_monstro = random.randint(1,4)
 			HP_monstro, HIT_monstro = personagens(lvl_monstro)
-			HP_avatar, HIT_avatar = personagens(LVL)
+			HP_avatar, HIT_avatar = heroi(LVL)
+			print()
 			slow_print("Você encontrou um veterano LVL {}, e ele está te mandando buscar uma breja no suujus. Derrote-o para não se atrasar ainda mais.".format(lvl_monstro))
-			print("Monstro - HP = {} Hitpoints = {}".format(HP_monstro, HIT_monstro))
+			print()
+			print("Veterano - HP = {} Hitpoints = {}".format(HP_monstro, HIT_monstro))
 			print("Avatar - HP = {} Hitpoints = {}".format(HP_avatar, HIT_avatar))
-
-
+			
 			# Inicio da implementação do combate com o monstro aleatório
-
 			decisao = input("lutar ou fugir? ")
 
 			if decisao == "lutar":
@@ -241,6 +254,8 @@ def main():
 					slow_print("você ganhou 10 moedas e subiu de nível!")
 					print("LVL = {0}".format(LVL))
 					print("Moedas = {0}".format(moedas))
+					if y <=3:
+						slow_print("Veterano: 'argh... bixão ta bruxo. espero que o 'PAI DE TODOS' não tenha visto esse vexame que eu passei.")
 					
 				elif HP_avatar < 0:
 					slow_print("Voce morreu!")
@@ -254,22 +269,29 @@ def main():
 				game_over = True
 
 
-			# Fim da implementação do combate com o monstro aleatório
+			#Fim da implementação do combate com o monstro aleatório
 
 
 
-		# Implementa o sistema de compra de itens
+	# Condições específicas de cenários
+
+		#implementa sistema de compra de itens
 
 		if cenario_atual == cenarios["vendedor"]:
 			if escolha == "comprar":
 				if moedas >= 10:
-					moedas = moedas - 10
-					LVL = LVL + 1 
+					moedas -= 10
+					LVL += 1
+					slow_print("Você comprou um pão de queijo vital!(-10 moedas)(+1 LVL)")
 
+				else:
+					escolha == "vendedor"
+					print("Você não possui moedas o suficiente.")
+					
 
-		# Implementa a batalha na biblioteca
+		# Implementa batalha na biblioteca
 
-	    if cenario_atual == cenarios["biblioteca"]:
+		if cenario_atual == cenarios["biblioteca"]:
 			HP_veterano, HIT_veterano = personagens(1)
 			HP_avatar, HIT_avatar = heroi(LVL)
 			print("Veterano - HP = {0} Hitpoints = {1}".format(HP_veterano, HIT_veterano))
@@ -295,10 +317,7 @@ def main():
 
 				elif HP_avatar < 0: 
 					print("Você morreu!")
-
-
 		# Implementa batalha na sala dos professores
-		
 		if cenario_atual == cenarios["andar dos professores"]:
 			HP_veterano, HIT_veterano = personagens(5)
 			HP_avatar, HIT_avatar = heroi(LVL)
@@ -330,7 +349,6 @@ def main():
 				else:
 					print("Você não está forte o suficiente! Volte quando estiver level 6 ou mais alto.")
 					cenario_atual == cenarios["andar dos professores"]
-
 
 		# Implementa a luta contra o Final Boss
 
@@ -365,7 +383,7 @@ def main():
 					slow_print("Você morreu!")
 					game_over = True
 
-
+		# Implementa luta com Boss Secreto Marquito Lisboa
 		if cenario_atual == cenarios["PAI DE TODOS"]:
 			HP_marquito, HIT_marquito = personagens(50)
 			HP_avatar, HIT_avatar = heroi(LVL)
@@ -402,12 +420,17 @@ def main():
 
 
 
-	slow_print("Azedou teu caldo, você morreu!")
-   
+
+
+	print("Azedou teu caldo, você morreu!")
+
+
+
+
+
 
 # Programa Principal.
 if __name__ == "__main__":
-	random.seed(time.time())
 
 	main()
 
