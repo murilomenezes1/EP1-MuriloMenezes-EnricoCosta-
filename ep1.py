@@ -67,25 +67,52 @@ def print_slow(str):
 	for letter in str:
 		sys.stdout.write(letter)
 		sys.stdout.flush()
-		time.sleep(0.1)
-print_slow(" ")
+		time.sleep(0.01*random.randint(1,10))
+
 
 def main():
-	print("Azedou, o EP1 chegou!")
+	print_slow("Azedou, o EP1 chegou!")
 	print()
 	print("---------------------")
 	print()
 	avatar = input("Qual é o seu nome? ")
 	print()
-	print("ééé {0}... A data de entrega do EP1 é amanhã e você ficou fazendo hora extra no suujinhus"
+	print_slow("ééé {0}... A data de entrega do EP1 é amanhã e você ficou fazendo hora extra no suujinhus"
 			", agora tem que correr atrás do prejuízo e tentar adiar essa bagaça."
 			"Você está na entrada do Insper, veja se consegue encontrar o professor e convencê-lo a fazer a famosa 'boa'.".format(avatar))
 
 	cenarios, nome_cenario_atual = carregar_cenarios()
 	LVL = 1
-	moedas = 10
+	moedas = 0
 
 	game_over = False
+	monstro = False
+
+	def heroi(LVL):
+		if LVL == 1:
+			healthpoints = 14
+			hitpoints = 9
+		else: 
+			healthpoints = 10 
+			hitpoints = 7 
+
+		HP_heroi = healthpoints*LVL
+		HIT_heroi = hitpoints + hitpoints*(LVL/5)
+
+		return HP_heroi, HIT_heroi
+
+	def personagens(LVL):
+
+		healthpoints = 10
+		hitpoints = 7
+
+		HP = healthpoints*LVL
+		HIT = hitpoints + hitpoints*(LVL/5)
+
+
+		return HP, HIT
+
+
 
 	while not game_over:
 		cenario_atual = cenarios[nome_cenario_atual]
@@ -101,19 +128,6 @@ def main():
 		print("Decida como seguir em frente.")
 		print()
 
-		mostro = False
-		x = random.randint(0,9)
-		if x >= 3:
-			monstro = True
- 
-		if monstro:
-
-			lvl_monstro = random.randint(1,4)
-			HP_monstro, HIT_monstro = personagens(lvl_monstro)
-			HP_avatar, HIT_avatar = personagens(LVL)
-			print("Você encontrou um veterano LVL {}, e ele está te mandando buscar uma breja no suujus. Derrote-o para não se atrasar ainda mais.".format(lvl_monstro))
-			print("Monstro - HP = {} Hitpoints = {}".format(HP_monstro, HIT_monstro))
-			print("Avatar - HP = {} Hitpoints = {}".format(HP_avatar, HIT_avatar))
 
 		opcoes = cenario_atual["opcoes"]
 		if len(opcoes) == 0:
@@ -132,6 +146,21 @@ def main():
 				print("Moiou o bigode, sepa você perdeu...")
 				game_over = True
 
+		# Implementa o monstro aleatório
+
+		x = random.randint(0,12)
+		if x <= 3:
+			monstro = True
+ 
+		if monstro:
+
+			lvl_monstro = random.randint(1,4)
+			HP_monstro, HIT_monstro = personagens(lvl_monstro)
+			HP_avatar, HIT_avatar = personagens(LVL)
+			print("Você encontrou um veterano LVL {}, e ele está te mandando buscar uma breja no suujus. Derrote-o para não se atrasar ainda mais.".format(lvl_monstro))
+			print("Monstro - HP = {} Hitpoints = {}".format(HP_monstro, HIT_monstro))
+			print("Avatar - HP = {} Hitpoints = {}".format(HP_avatar, HIT_avatar))
+
 		if cenario_atual == cenarios["vendedor"]:
 			if escolha == "comprar":
 				if moedas >= 10:
@@ -139,18 +168,10 @@ def main():
 					LVL = LVL + 1 
 	print("Azedou teu caldo, você morreu!")
 
-def personagens(LVL):
 
-	healthpoints = 10
-	hitpoints = 7
-
-	HP = healthpoints*LVL
-	HIT = hitpoints + hitpoints*(LVL/5)
-
-
-	return HP, HIT
 # Programa Principal.
 if __name__ == "__main__":
+	random.seed(time.time())
 
 	main()
 
