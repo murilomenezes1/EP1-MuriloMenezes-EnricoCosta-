@@ -58,6 +58,60 @@ def carregar_cenarios():
 			"opcoes" : {
 				"inicio" : "voltar para a entrada"
 			}
+		},
+		"lutar" : {
+			"titulo" : "Vitória!!",
+			"descricao" : "você derrotou o inimigo, e assim subiu de nivel e ganhou 10 moedas!",
+			"opcoes" : {
+				"inicio" : "voltar para a entrada"
+			}
+		},
+		"desafiar" : {
+			"titulo" : "Vitória!!",
+			"descricao" : "Você derrotou o estudante LVL 5 e agora pode seguir para a sala do professor de Desoft",
+			"opcoes" : {
+				"inicio" : "voltar para a entrada",
+				"sala do Toshi" : "Conversar com o professor"
+			}
+		},
+		"sala do Toshi" : {
+			"titulo" : "A hora da verdade.",
+			"descricao" : "Você finalmente chegou à sala do Toshi! Derrote-o e o EP será adiado. Lembre-se, o Toshi é um NPC LVL 12!",
+			"opcoes" : {
+				"lutar até a morte" : "Ganhe e o EP é adiado, perca e é Game Over.",
+				"andar dos professores" : "Voltar ao corredor do andar dos professores."
+
+			}
+		},
+		"PAI DE TODOS" : {
+			"titulo" : "AZEDOU MULEQUE!",
+			"descricao" : "Você proferiu um de seus nomes em vão e ele te escutou! Ele quem, você pergunta? ELE! MARCOS LISBOA AKA MARQUITO DA GALERA AKA PAI DE TODOS! Derrote-o e você se formará imediatamente, mas será jubilado caso perca.",
+			"opcoes" : {
+				"descer a mão no marquito" : "Ahh fi... 3 meses de muay thai aqui, ele não guenta 3 minutos de trocação comigo."
+			}
+		},
+		"descer a mão no marquito" : {
+			"titulo" : "GG",
+			"descricao" : "Game Over"
+		},
+		"lutar até a morte" : {
+			"titulo" : "Sala do Toshi",
+			"descricao" : "Você derrotou o Toshi e o EP foi adiado",
+			"opcoes" : {
+				"inicio" : "voltar ao inicio",
+				"game over" : "Finalizar o jogo",
+				"vasculhar" : "vasculhar a sala do professor"
+			}
+		},
+		"vasculhar" : {
+			"titulo" : "...",
+			"descricao" : "você encontrou o PC do Toshi desbloqueado e descobriu funções inacreditáveis nele.",
+			"opcoes" : {
+				"Teleport" : "Teletransporte-se para qualquer sala do Insper",
+				"LVL boost" : "Digite a senha e de LVL UP até o nível 100",
+				"Notas PI" : "Editar sua nota na PI",
+			}
+
 		}
 	}
 	nome_cenario_atual = "inicio"
@@ -207,8 +261,34 @@ def main():
 				if moedas >= 10:
 					moedas = moedas - 10
 					LVL = LVL + 1 
-	slow_print("Azedou teu caldo, você morreu!")
+	    if cenario_atual == cenarios["biblioteca"]:
+			HP_veterano, HIT_veterano = personagens(1)
+			HP_avatar, HIT_avatar = heroi(LVL)
+			print("Veterano - HP = {0} Hitpoints = {1}".format(HP_veterano, HIT_veterano))
+			print("Avatar - HP = {0} Hitpoints = {1}".format(HP_avatar, HIT_avatar))
+			if escolha == "lutar":
+				
+				Round = 1
 
+				while HP_veterano > 0 and HP_avatar > 0:
+					HP_veterano = HP_veterano - HIT_avatar
+					HP_avatar = HP_avatar - HIT_veterano
+					print("Round: {0}".format(Round))
+					print("Vida do veterano: {0}".format(HP_veterano))
+					print("Sua vida: {0}".format(HP_avatar))
+					Round += 1 
+				Round = 0 
+
+				if HP_veterano < 0:
+					LVL += 1 
+					moedas += 10 
+					
+					
+
+				elif HP_avatar < 0: 
+					print("Você morreu!")
+	slow_print("Azedou teu caldo, você morreu!")
+   
 
 # Programa Principal.
 if __name__ == "__main__":
