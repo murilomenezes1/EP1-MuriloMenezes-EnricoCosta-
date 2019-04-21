@@ -40,7 +40,7 @@ def carregar_cenarios():
 			"titulo" : "salas dos professores",
 			"descricao" : "voce chegou ao andar dos professores, mas um estudante level 5 trava a passagem para a sala do professor de Desoft. Derrote-o para seguir em frente.",
 			"opcoes" : {
-				"desafiar" : "Desafiar cada estudante para acessar a sala do professor.",
+				"lutar" : "Desafiar o estudante para acessar a sala do professor.",
 				"inicio" : "voltar para a entrada"
 			}
 		},
@@ -201,7 +201,7 @@ def main():
 
 		else: 
 			for opcao, descricao_da_opcao in cenario_atual["opcoes"].items():
-				print("{0}:{1}".format(opcao, descricao_da_opcao))
+				print("{0} : {1}".format(opcao, descricao_da_opcao))
 			escolha = input("Eai, qual vai ser? ")
 
 			if escolha in opcoes:
@@ -211,7 +211,7 @@ def main():
 				nome_cenario_atual = escolha
 
 			else: 
-				print("Escolha errada... você perdeu!")
+				slow_print("Escolha errada... você perdeu!")
 				game_over = True
 
 		# Implementação do Monstro
@@ -286,7 +286,7 @@ def main():
 
 				else:
 					escolha == "vendedor"
-					print("Você não possui moedas o suficiente.")
+					slow_print("Você não possui moedas o suficiente.")
 					
 
 		# Implementa batalha na biblioteca
@@ -324,31 +324,30 @@ def main():
 			print("Veterano - HP = {0} Hitpoints = {1}".format(HP_veterano, HIT_veterano))
 			print("Avatar - HP = {0} Hitpoints = {1}".format(HP_avatar, HIT_avatar))
 	
-			if LVL > 5:
-				if escolha == "desafiar":
+			
+			if escolha == "lutar":
 
-					Round = 1
+				Round = 1
 
-					while HP_veterano > 0 and HP_avatar > 0:
-						HP_veterano = HP_veterano - HIT_avatar
-						HP_avatar = HP_avatar - HIT_veterano
-						print("Round: {0}".format(Round))
-						print("Vida do veterano: {0}".format(HP_veterano))
-						print("Sua vida: {0}".format(HP_avatar))
-						Round += 1 
-					Round = 0 
+				while HP_veterano > 0 and HP_avatar > 0:
+					HP_veterano = HP_veterano - HIT_avatar
+					HP_avatar = HP_avatar - HIT_veterano
+					print("Round: {0}".format(Round))
+					print("Vida do veterano: {0}".format(HP_veterano))
+					print("Sua vida: {0}".format(HP_avatar))
+					Round += 1 
+				Round = 0 
 
-					if HP_veterano < 0 and HP_avatar > 0:
-						LVL += 1 
-						moedas += 10 
+				if HP_veterano < 0 and HP_avatar > 0:
+					LVL += 1 
+					moedas += 10 
 					
 					
 
-					elif HP_avatar < 0: 
-						print("Você morreu!")
-				else:
-					print("Você não está forte o suficiente! Volte quando estiver level 6 ou mais alto.")
-					cenario_atual == cenarios["andar dos professores"]
+				elif HP_avatar <= 0: 
+					print("Você morreu!")
+					game_over = True
+			
 
 		# Implementa a luta contra o Final Boss
 
