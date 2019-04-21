@@ -256,11 +256,19 @@ def main():
 
 			# Fim da implementação do combate com o monstro aleatório
 
+
+
+		# Implementa o sistema de compra de itens
+
 		if cenario_atual == cenarios["vendedor"]:
 			if escolha == "comprar":
 				if moedas >= 10:
 					moedas = moedas - 10
 					LVL = LVL + 1 
+
+
+		# Implementa a batalha na biblioteca
+
 	    if cenario_atual == cenarios["biblioteca"]:
 			HP_veterano, HIT_veterano = personagens(1)
 			HP_avatar, HIT_avatar = heroi(LVL)
@@ -287,6 +295,81 @@ def main():
 
 				elif HP_avatar < 0: 
 					print("Você morreu!")
+
+
+		# Implementa batalha na sala dos professores
+		
+		if cenario_atual == cenarios["andar dos professores"]:
+			HP_veterano, HIT_veterano = personagens(5)
+			HP_avatar, HIT_avatar = heroi(LVL)
+			print("Veterano - HP = {0} Hitpoints = {1}".format(HP_veterano, HIT_veterano))
+			print("Avatar - HP = {0} Hitpoints = {1}".format(HP_avatar, HIT_avatar))
+	
+			if LVL > 5:
+				if escolha == "desafiar":
+
+					Round = 1
+
+					while HP_veterano > 0 and HP_avatar > 0:
+						HP_veterano = HP_veterano - HIT_avatar
+						HP_avatar = HP_avatar - HIT_veterano
+						print("Round: {0}".format(Round))
+						print("Vida do veterano: {0}".format(HP_veterano))
+						print("Sua vida: {0}".format(HP_avatar))
+						Round += 1 
+					Round = 0 
+
+					if HP_veterano < 0 and HP_avatar > 0:
+						LVL += 1 
+						moedas += 10 
+					
+					
+
+					elif HP_avatar < 0: 
+						print("Você morreu!")
+				else:
+					print("Você não está forte o suficiente! Volte quando estiver level 6 ou mais alto.")
+					cenario_atual == cenarios["andar dos professores"]
+
+
+		# Implementa a luta contra o Final Boss
+
+		if cenario_atual == cenarios["sala do Toshi"]:
+			HP_toshi, HIT_toshi = personagens(12)
+			HP_avatar, HIT_avatar = heroi(LVL)
+
+			print("Toshi - HP = {0} Hitpoints = {1}".format(HP_toshi, HIT_toshi))
+			print("Avatar - HP = {0} Hitpoints = {1}".format(HP_avatar, HIT_avatar))
+
+			if escolha == "lutar até a morte":
+
+				Round = 1
+
+				while HP_toshi > 0 and HP_avatar >0:
+					HP_toshi = HP_toshi - HIT_avatar
+					HP_avatar = HP_avatar - HIT_toshi
+					print("Round: {0}".format(Round))
+					print("Vida do Toshi: {0}".format(HP_toshi))
+					print("Sua vida: {0}".format(HP_avatar))
+					Round += 1
+				Round = 0 
+
+				if HP_toshi < 0 and HP_avatar > 0:
+					slow_print("Parabéns! Você derrotou o professor e conseguiu adiar o EP!")
+					slow_print("Toshi: Você me derrotou desta vez. o EP será adiado...")
+					slow_print("Toshi: ai ai ai, fui derrotado por um mero bixo... o 'PAI DE TODOS' vai me demitir!")
+					
+
+				elif HP_avatar < 0:
+					slow_print("Todo o esforço foi em vão... era melhor ter ficado no sujinhuus!")
+					slow_print("Você morreu!")
+					game_over = True
+
+
+
+
+
+
 	slow_print("Azedou teu caldo, você morreu!")
    
 
