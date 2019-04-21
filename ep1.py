@@ -161,6 +161,46 @@ def main():
 			print("Monstro - HP = {} Hitpoints = {}".format(HP_monstro, HIT_monstro))
 			print("Avatar - HP = {} Hitpoints = {}".format(HP_avatar, HIT_avatar))
 
+
+			# Inicio da implementação do combate com o monstro aleatório
+
+			decisao = input("lutar ou fugir? ")
+
+			if decisao == "lutar":
+				print("BATALHA!")
+				Round = 1
+				while HP_monstro > 0 and HP_avatar > 0:
+					HP_monstro = HP_monstro - HIT_avatar
+					HP_avatar = HP_avatar - HIT_monstro
+					print("Round: {}".format(Round))
+					print("Vida do veterano: {0}".format(HP_monstro))
+					print("Sua vida: {0}".format(HP_avatar))
+					Round += 1 
+				Round = 0 
+
+
+				if HP_monstro < 0 and HP_avatar > 0:
+					print("Voce ganhou a luta!")
+					LVL +=1 
+					moedas += 10 
+					print("você ganhou 10 moedas e subiu de nível!")
+					print("LVL = {0}".format(LVL))
+					print("Moedas = {0}".format(moedas))
+					
+				elif HP_avatar < 0:
+					print("Voce morreu!")
+					game_over = True
+			elif decisao == "fugir":
+				print("Você fugiu!")
+				
+
+			else:
+				print("escolha errada.. você perdeu!")
+				game_over = True
+
+
+			# Fim da implementação do combate com o monstro aleatório
+
 		if cenario_atual == cenarios["vendedor"]:
 			if escolha == "comprar":
 				if moedas >= 10:
