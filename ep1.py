@@ -6,6 +6,7 @@
 # - aluno B: Murilo Lima de Campos Menezes, murilolcm@al.insper.edu.br
 
 import random
+import sys,time
 
 
 def carregar_cenarios():
@@ -62,6 +63,12 @@ def carregar_cenarios():
 	nome_cenario_atual = "inicio"
 	return cenarios, nome_cenario_atual
 
+def print_slow(str):
+	for letter in str:
+		sys.stdout.write(letter)
+		sys.stdout.flush()
+		time.sleep(0.1)
+print_slow(" ")
 
 def main():
 	print("Azedou, o EP1 chegou!")
