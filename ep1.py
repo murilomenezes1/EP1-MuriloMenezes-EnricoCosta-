@@ -366,6 +366,38 @@ def main():
 					game_over = True
 
 
+		if cenario_atual == cenarios["PAI DE TODOS"]:
+			HP_marquito, HIT_marquito = personagens(50)
+			HP_avatar, HIT_avatar = heroi(LVL)
+
+			print("Marquito - HP = {0} Hitpoints = {1}".format(HP_marquito, HIT_marquito))
+			print("Avatar - HP = {0} Hitpoints = {1}".format(HP_avatar, HIT_avatar))
+
+
+			if escolha == "descer a mão no marquito":
+
+				Round = 1
+
+				while HP_marquito > 0 and HP_avatar > 0:
+					HP_marquito = HP_marquito - HP_avatar
+					HP_avatar = HP_avatar - HIT_marquito
+					print("Round: {0}".format(Round))
+					print("Vida do Marquito: {0}".format(HP_marquito))
+					print("Sua vida: {0}".format(HP_avatar))
+					Round += 1 
+
+				Round = 0 
+
+				if HP_marquito < 0 and HP_avatar > 0:
+
+					slow_print("Por um milagre do destino, você derrotou Marcos Lisboa. Parabéns, você acaba de se formar automaticamente!")
+
+				elif HP_avatar < 0:
+					slow_print("Você morreu!")
+					slow_print("KKK VOCÊ FOI JUBILADO, FI!")
+					game_over = True
+
+
 
 
 
