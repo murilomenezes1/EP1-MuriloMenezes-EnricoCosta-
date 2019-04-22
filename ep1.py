@@ -146,7 +146,7 @@ def carregar_cenarios():
 				"inicio" : "voltar para entrada"
 			}
 		},
-		"Level boost" : {
+		"LVL boost" : {
 			"titulo" : "Subir de level",
 			"descricao" : "Você upou para o level 45 direto, esta proximo do 'PAI DE TODOS'!",
 			"opcoes" : {
@@ -154,12 +154,13 @@ def carregar_cenarios():
 				"vasculhar" : "continuar utilizando o computador"
 			}
 		},
+		"game over" : {
+			"titulo" : "fim do jogo",
+			"descricao" : "Você venceu"
+			}
+		}
 
-
-
-
-
-	}
+	
 
 	nome_cenario_atual = "inicio"
 	return cenarios, nome_cenario_atual
