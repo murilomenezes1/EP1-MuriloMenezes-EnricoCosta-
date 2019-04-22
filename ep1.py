@@ -118,7 +118,7 @@ def carregar_cenarios():
 			"titulo" : "O que é isso?",
 			"descricao" : "Você encontrou uma chave! O que será que ela abre?",
 			"opcoes" : {
-				"incio" : "voltar para a entrada."
+				"inicio" : "voltar para a entrada."
 
 			}
 
@@ -132,7 +132,6 @@ def carregar_cenarios():
 		}
 
 
-		
 	}
 
 	nome_cenario_atual = "inicio"
