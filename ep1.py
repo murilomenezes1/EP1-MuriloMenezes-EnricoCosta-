@@ -109,7 +109,7 @@ def carregar_cenarios():
 			"titulo" : "...",
 			"descricao" : "você encontrou o PC do Toshi desbloqueado e descobriu funções inacreditáveis nele.",
 			"opcoes" : {
-				"Teleport" : "Teletransporte-se para qualquer sala do Insper",
+				"teleport" : "Teletransporte-se para qualquer sala do Insper",
 				"LVL boost" : "Digite a senha e de LVL UP até o nível 45",
 				"Notas PI" : "Editar sua nota na PI",
 			}
@@ -130,7 +130,33 @@ def carregar_cenarios():
 		    "opcoes" : {
 		        "inicio" : "voltar para entrada"
 		    }
-		}
+		},
+		"Notas PI": {
+			"titulo" : "PI",
+			"descricao" : "Você mudou sua nota da PI",
+			"opcoes" : {
+				"inicio" : "voltar para entrada",
+				"vasculhar" : "continuar utilizando o computador"
+			}
+		},
+		"teleport" : {
+			"titulo" : "Teletransportar",
+			"descricao" : "Vá para onde quiser do Insper",
+			"opcoes" : {
+				"inicio" : "voltar para entrada"
+			}
+		},
+		"Level boost" : {
+			"titulo" : "Subir de level",
+			"descricao" : "Você upou para o level 45 direto, esta proximo do 'PAI DE TODOS'!",
+			"opcoes" : {
+				"inicio" : "voltar pra entrada",
+				"vasculhar" : "continuar utilizando o computador"
+			}
+		},
+
+
+
 
 
 	}
@@ -190,7 +216,7 @@ def main():
 
 		for i in inventario:
 			if "espada" in inventario:
-				HIT_heroi += 10 
+				HIT_heroi += 15
 
 		return HP_heroi, HIT_heroi
 
@@ -452,6 +478,35 @@ def main():
 
 			if "espada" not in inventario:
 				inventario.append("espada")
+
+
+		if cenario_atual == cenarios["lutar até a morte"]:
+			if escolha == "game over":
+				game_over == True
+
+
+		if cenario_atual == cenarios["vasculhar"]:
+			if escolha == "teleport":
+				a = input("Para onde ir? ")
+
+				escolha == a
+
+			elif escolha == "LVL boost":
+				LVL = 45
+
+			elif escolha == "Notas PI":
+				b = int(input("Que nota você quer na PI? "))
+
+				print("Nota PI = {}".format(b))
+
+
+
+
+
+
+
+
+
 
 
 
