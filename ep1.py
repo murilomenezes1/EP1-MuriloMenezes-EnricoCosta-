@@ -175,16 +175,22 @@ def main():
 	game_over = False
 	monstro = False
 
-	def heroi(LVL):
+	def heroi(LVL,inventario):
 		if LVL == 1:
 			healthpoints = 14
 			hitpoints = 9
+
 		else: 
 			healthpoints = 10 
 			hitpoints = 7 
 
+
 		HP_heroi = healthpoints*LVL
 		HIT_heroi = hitpoints + hitpoints*(LVL/5)
+
+		for i in inventario:
+			if "espada" in inventario:
+				HIT_heroi += 10 
 
 		return HP_heroi, HIT_heroi
 
@@ -247,7 +253,7 @@ def main():
 
 			lvl_monstro = random.randint(1,4)
 			HP_monstro, HIT_monstro = personagens(lvl_monstro)
-			HP_avatar, HIT_avatar = heroi(LVL)
+			HP_avatar, HIT_avatar = heroi(LVL,inventario)
 			print()
 			slow_print("Você encontrou um veterano LVL {}, e ele está te mandando buscar uma breja no suujus. Derrote-o para não se atrasar ainda mais.".format(lvl_monstro))
 			print()
@@ -316,7 +322,7 @@ def main():
 
 		if cenario_atual == cenarios["biblioteca"]:
 			HP_veterano, HIT_veterano = personagens(1)
-			HP_avatar, HIT_avatar = heroi(LVL)
+			HP_avatar, HIT_avatar = heroi(LVL,inventario)
 			print("Veterano - HP = {0} Hitpoints = {1}".format(HP_veterano, HIT_veterano))
 			print("Avatar - HP = {0} Hitpoints = {1}".format(HP_avatar, HIT_avatar))
 			if escolha == "lutar":
@@ -343,7 +349,7 @@ def main():
 		# Implementa batalha na sala dos professores
 		if cenario_atual == cenarios["andar dos professores"]:
 			HP_veterano, HIT_veterano = personagens(5)
-			HP_avatar, HIT_avatar = heroi(LVL)
+			HP_avatar, HIT_avatar = heroi(LVL,inventario)
 			print("Veterano - HP = {0} Hitpoints = {1}".format(HP_veterano, HIT_veterano))
 			print("Avatar - HP = {0} Hitpoints = {1}".format(HP_avatar, HIT_avatar))
 	
@@ -376,7 +382,7 @@ def main():
 
 		if cenario_atual == cenarios["sala do Toshi"]:
 			HP_toshi, HIT_toshi = personagens(12)
-			HP_avatar, HIT_avatar = heroi(LVL)
+			HP_avatar, HIT_avatar = heroi(LVL,inventario)
 
 			print("Toshi - HP = {0} Hitpoints = {1}".format(HP_toshi, HIT_toshi))
 			print("Avatar - HP = {0} Hitpoints = {1}".format(HP_avatar, HIT_avatar))
@@ -408,7 +414,7 @@ def main():
 		# Implementa luta com Boss Secreto Marquito Lisboa
 		if cenario_atual == cenarios["PAI DE TODOS"]:
 			HP_marquito, HIT_marquito = personagens(50)
-			HP_avatar, HIT_avatar = heroi(LVL)
+			HP_avatar, HIT_avatar = heroi(LVL,inventario)
 
 			print("Marquito - HP = {0} Hitpoints = {1}".format(HP_marquito, HIT_marquito))
 			print("Avatar - HP = {0} Hitpoints = {1}".format(HP_avatar, HIT_avatar))
@@ -439,8 +445,16 @@ def main():
 
 		if cenario_atual == cenarios["lutar"]:
 			if escolha == "investigar":
-				
-				inventario.append("chave")
+				if "chave" not in inventario:
+					inventario.append("chave")
+
+		if cenario_atual == cenarios["banheiro"]:
+
+			if "espada" not in inventario:
+				inventario.append("espada")
+
+
+
 
 
 
