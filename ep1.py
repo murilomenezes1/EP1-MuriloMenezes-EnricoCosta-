@@ -406,6 +406,15 @@ def main():
 			
 
 		# Implementa a luta contra o Final Boss
+		if cenario_atual == cenarios["andar dos professores"]:
+			if escolha == "sala do Toshi":
+				for i in inventario:
+					if "chave" not in inventario: 
+						print("A porta está trancada. Tente encontrar a chave.")
+						cenario_atual = cenarios["andar dos professores"]
+					else:
+						cenario_atual = cenarios["sala do Toshi"]
+				return cenario_atual
 
 		if cenario_atual == cenarios["sala do Toshi"]:
 			HP_toshi, HIT_toshi = personagens(12)
@@ -452,7 +461,7 @@ def main():
 				Round = 1
 
 				while HP_marquito > 0 and HP_avatar > 0:
-					HP_marquito = HP_marquito - HP_avatar
+					HP_marquito = HP_marquito - HIT_avatar
 					HP_avatar = HP_avatar - HIT_marquito
 					print("Round: {0}".format(Round))
 					print("Vida do Marquito: {0}".format(HP_marquito))
