@@ -17,7 +17,8 @@ def carregar_cenarios():
 			"opcoes": {
 				"casa do pão de queijo": "seguir em direcao a casa do pão de queijo",
 				"biblioteca": "ir para biblioteca",
-				"andar dos professores": "subir pelo elevador até o andar dos professores."
+				"andar dos professores": "subir pelo elevador até o andar dos professores.",
+				"banheiro": "ir até o banheiro"
 			}
 		},
 		"casa do pão de queijo" : {
