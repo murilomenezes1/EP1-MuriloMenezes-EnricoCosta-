@@ -63,6 +63,7 @@ def carregar_cenarios():
 			"titulo" : "Vitória!!",
 			"descricao" : "você derrotou o inimigo, e assim subiu de nivel e ganhou 10 moedas!",
 			"opcoes" : {
+				"investigar" : "investigar a biblioteca",
 				"inicio" : "voltar para a entrada"
 			}
 		},
@@ -108,12 +109,23 @@ def carregar_cenarios():
 			"descricao" : "você encontrou o PC do Toshi desbloqueado e descobriu funções inacreditáveis nele.",
 			"opcoes" : {
 				"Teleport" : "Teletransporte-se para qualquer sala do Insper",
-				"LVL boost" : "Digite a senha e de LVL UP até o nível 100",
+				"LVL boost" : "Digite a senha e de LVL UP até o nível 45",
 				"Notas PI" : "Editar sua nota na PI",
 			}
 
+		},
+		"investigar" : {
+			"titulo" : "O que é isso?",
+			"descricao" : "Você encontrou uma chave! O que será que ela abre?",
+			"opcoes" : {
+				"incio" : "voltar para a entrada."
+
+			}
+
 		}
+		
 	}
+
 	nome_cenario_atual = "inicio"
 	return cenarios, nome_cenario_atual
 
@@ -149,6 +161,7 @@ def main():
 	cenarios, nome_cenario_atual = carregar_cenarios()
 	LVL = 1
 	moedas = 0
+	inventario = []
 
 	game_over = False
 	monstro = False
@@ -191,6 +204,7 @@ def main():
 		print()
 		print("LVL: {}".format(LVL))
 		print("Moedas: {}".format(moedas))
+		print("inventario: {}".format(inventario))
 		slow_print("Decida como seguir em frente.")
 		print()
 
@@ -215,7 +229,7 @@ def main():
 				game_over = True
 
 		# Implementação do Monstro
-		x = random.randint(0,14)
+		x = random.randint(0,20)
 		y = random.randint(0,20)
 		if x <= 3:
 			monstro = True
@@ -325,7 +339,7 @@ def main():
 			print("Avatar - HP = {0} Hitpoints = {1}".format(HP_avatar, HIT_avatar))
 	
 			
-			if escolha == "lutar":
+			if escolha == "desafiar":
 
 				Round = 1
 
@@ -413,6 +427,11 @@ def main():
 					slow_print("Você morreu!")
 					slow_print("KKK VOCÊ FOI JUBILADO, FI!")
 					game_over = True
+
+		if cenario_atual == cenarios["lutar"]:
+			if escolha == "investigar":
+				
+				inventario.append("chave")
 
 
 
