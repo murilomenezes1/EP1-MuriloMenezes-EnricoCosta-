@@ -40,7 +40,7 @@ def carregar_cenarios():
 			"titulo" : "salas dos professores",
 			"descricao" : "voce chegou ao andar dos professores, mas um estudante level 5 trava a passagem para a sala do professor de Desoft. Derrote-o para seguir em frente.",
 			"opcoes" : {
-				"lutar" : "Desafiar o estudante para acessar a sala do professor.",
+				"desafiar" : "Desafiar o estudante para acessar a sala do professor.",
 				"inicio" : "voltar para a entrada"
 			}
 		},
@@ -122,7 +122,16 @@ def carregar_cenarios():
 
 			}
 
+		},
+		"banheiro" : {
+		    "titulo" : "o que é isso?",
+		    "descricao" : "Você encontrou uma espada! Use-a para derrotar um inimigo mais forte",
+		    "opcoes" : {
+		        "inicio" : "voltar para entrada"
+		    }
 		}
+
+
 		
 	}
 
