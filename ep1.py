@@ -125,7 +125,7 @@ def carregar_cenarios():
 
 		},
 		"banheiro" : {
-		    "titulo" : "o que é isso?",
+		    "titulo" : "Banheiro",
 		    "descricao" : "Você encontrou uma espada! Use-a para derrotar um inimigo mais forte",
 		    "opcoes" : {
 		        "inicio" : "voltar para entrada"
@@ -138,13 +138,7 @@ def carregar_cenarios():
 				"inicio" : "voltar para entrada",
 				"vasculhar" : "continuar utilizando o computador"
 			}
-		},
-		"teleport" : {
-			"titulo" : "Teletransportar",
-			"descricao" : "Vá para onde quiser do Insper",
-			"opcoes" : {
-				"inicio" : "voltar para entrada"
-			}
+		
 		},
 		"LVL boost" : {
 			"titulo" : "Subir de level",
@@ -215,9 +209,8 @@ def main():
 		HP_heroi = healthpoints*LVL
 		HIT_heroi = hitpoints + hitpoints*(LVL/5)
 
-		for i in inventario:
-			if "espada" in inventario:
-				HIT_heroi += 15
+		if "espada" in inventario:
+			HIT_heroi += 15
 
 		return HP_heroi, HIT_heroi
 
@@ -375,6 +368,7 @@ def main():
 					print("Você morreu!")
 		# Implementa batalha na sala dos professores
 		if cenario_atual == cenarios["andar dos professores"]:
+			slow_print("Barbara: As paredes tem ouvidos! Dizem que se você proferir o nome dele em vão, ele te escutará.")
 			HP_veterano, HIT_veterano = personagens(5)
 			HP_avatar, HIT_avatar = heroi(LVL,inventario)
 			print("Veterano - HP = {0} Hitpoints = {1}".format(HP_veterano, HIT_veterano))
@@ -406,15 +400,22 @@ def main():
 			
 
 		# Implementa a luta contra o Final Boss
-		if cenario_atual == cenarios["andar dos professores"]:
+		if cenario_atual == cenarios["desafiar"]:
 			if escolha == "sala do Toshi":
-				for i in inventario:
-					if "chave" not in inventario: 
-						print("A porta está trancada. Tente encontrar a chave.")
-						cenario_atual = cenarios["andar dos professores"]
-					else:
-						cenario_atual = cenarios["sala do Toshi"]
-				return cenario_atual
+
+				if "chave" not in inventario: 
+					print("A porta está trancada. Tente encontrar a chave.")
+					nome_cenario_atual = "andar dos professores"
+				else:
+					print("A porta está trancada. Ainda bem que você encontrou aquela chave na biblioteca...")
+					nome_cenario_atual = escolha
+
+				cenario_atual = cenarios[nome_cenario_atual]
+				
+
+
+
+
 
 		if cenario_atual == cenarios["sala do Toshi"]:
 			HP_toshi, HIT_toshi = personagens(12)
@@ -490,18 +491,15 @@ def main():
 				inventario.append("espada")
 
 
-		if cenario_atual == cenarios["lutar até a morte"]:
-			if escolha == "game over":
-				game_over == True
-
-
 		if cenario_atual == cenarios["vasculhar"]:
 			if escolha == "teleport":
 				a = input("Para onde ir? ")
 
-				escolha == a
 
-			elif escolha == "LVL boost":
+				nome_cenario_atual = a
+				slow_print("você se teletransportou para '{}'.".format(a))
+
+			if escolha == "LVL boost":
 				LVL = 45
 
 			elif escolha == "Notas PI":
@@ -510,6 +508,9 @@ def main():
 				print("Nota PI = {}".format(b))
 
 
+		if cenario_atual == cenarios["game over"]:
+			print("GG, você ganhou... até o marquito te achar.")
+			game_over == True
 
 
 
@@ -528,7 +529,10 @@ def main():
 
 
 
-	print("Azedou teu caldo, você morreu!")
+
+
+
+	print("Game Over!")
 
 
 
