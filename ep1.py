@@ -304,7 +304,7 @@ def main():
 					print("LVL = {0}".format(LVL))
 					print("Moedas = {0}".format(moedas))
 					if y <=3:
-						slow_print("Veterano: 'argh... bixão ta bruxo. espero que o 'PAI DE TODOS' não tenha visto esse vexame que eu passei.")
+						slow_print("Veterano: 'argh... bixão ta bruxo. espero que o 'PAI DE TODOS' não tenha visto esse vexame que eu passei.'")
 					
 				elif HP_avatar < 0:
 					slow_print("Voce morreu!")
